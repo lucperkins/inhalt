@@ -2,6 +2,7 @@
   "name": "inhalt",
   "version": "0.1.0-SNAPSHOT",
   "description": "Content management system",
+  "type": "module",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
   "module": "build/module/index.js",
@@ -17,7 +18,7 @@
     "build:main": "tsc -p tsconfig.json",
     "build:module": "tsc -p tsconfig.module.json",
     "test": "run-s build test:*",
-    "test:unit": "nyc --silent ava",
+    "test:unit": "nyc ava",
     "watch:test": "nyc --silent ava --watch"
   },
   "engines": {
@@ -56,5 +57,13 @@
     "exclude": [
       "**/*.spec.js"
     ]
+  },
+  "dependencies": {
+    "rehype-sanitize": "^5.0.1",
+    "rehype-stringify": "^9.0.3",
+    "remark-parse": "^10.0.1",
+    "remark-rehype": "^10.1.0",
+    "remark-stringify": "^10.0.2",
+    "unified": "^10.1.1"
   }
 }

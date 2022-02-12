@@ -1,7 +1,8 @@
 import test from 'ava';
 
-import { hello } from '.';
+import { convert } from './index.js';
 
-test("hello", async (t) => {
-  t.deepEqual(await hello(), "Hello");
+test("convert", async (t) => {
+  const result: string = await convert("# Hello");
+  t.deepEqual(result, "<h1>Hello</h1>");
 });
