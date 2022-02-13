@@ -1,6 +1,6 @@
 import { assert, test } from "vitest";
 
-import { Document, File, Files, glob } from "../src";
+import { Document, documents, File, Files, glob } from "../src";
 
 test("globs", async () => {
   const expected: File[] = [
@@ -36,7 +36,6 @@ test("markdown", async () => {
     },
   ];
 
-  const mdFiles: Files = await glob("test/_docs/**/*.{md,mdx}");
-  const docs: Document[] = await mdFiles.documents();
+  const docs: Document[] = await documents("test/_docs/**/*.{md,mdx}");
   assert.sameDeepMembers(docs, expected);
 });

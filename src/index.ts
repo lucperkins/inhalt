@@ -54,7 +54,7 @@ class Files {
     this._files = files;
   }
 
-  async documents(): Promise<Document[]> {
+  documents(): Promise<Document[]> {
     return Promise.all(
       this._files.map(async (file) => {
         const html = await convert(file.raw);
@@ -89,4 +89,8 @@ const glob = async (pattern: string | string[]): Promise<Files> => {
   return new Files(files);
 };
 
-export { glob, Document, File, Files };
+const documents = async (pattern: string | string[]): Promise<Document[]> => {
+  return await (await glob(pattern)).documents();
+};
+
+export { glob, documents, Document, File, Files };
