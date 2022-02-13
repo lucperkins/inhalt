@@ -12,8 +12,8 @@ Here's an example for a [Next.js][next] project:
 import { glob } from "inhalt";
 
 export async function getStaticProps() {
-  const files = await glob("docs/**/*.{md,mdx}");
-  const docs = await files.documents();
+  // Fetch all Markdown docs in the supplied glob
+  const docs = await documents("docs/**/*.{md,mdx}");
 
   return {
     props: {
