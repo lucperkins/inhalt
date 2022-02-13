@@ -8,4 +8,4 @@ A library for content management in your filesystem. Inhalt is meant to power co
 
 [Typedoc][docs]
 
-[docs]: https://lucperkins/github.io/inhalt
+[docs]: https://lucperkins.github.io/inhalt
