@@ -13,9 +13,18 @@
 <a href="#goals" id="goals" style="color: inherit; text-decoration: none;">
   <h2>Goals</h2>
 </a>
-<p>Static site generation has recently gotten <em>very</em> interesting in the JavaScript space with the rise of blazing-fast build tools like <a href="https://vitejs.dev">Vite</a> and <a href="https://swc.rs">swc</a> and powerful, developer-friendly frameworks like <a href="https://nextjs.org">Next.js</a>, <a href="https://gatsbyjs.com">Gatsby</a>, <a href="https://nuxtjs.org">Nuxt</a>, <a href="https://astro.build">Astro</a>, and <a href="https://remix.run">Remix</a>.</p>
-<p>One thing these frameworks have in common is that they require you to do your own content management. If you want to build a blog or a documentation site, you need to supply your own logic to fetch files, choose the right data from those files, convert files in formats like <a href="https://www.markdownguide.org">Markdown</a> to HTML, and so on. Some of these frameworks do have good content management libraries, such as <a href="https://content.nuxtjs.org"><code>nuxt-content</code></a> for <a href="https://nuxtjs.org">Nuxt</a>, but I don&#39;t really see anyone sharing their work or trying to build something foundational to relieve others of work.</p>
-<p>But I look out in this space and see a lot of redundant effort. What if we could just have <em>one</em> really good library that developers could use directly inside of these frameworks <em>or</em> as the basis for framwork-specific libraries.</p>
+<p>Static site generation has recently gotten <em>very</em> interesting in the JavaScript space with the rise of blazing-fast build tools like <a href="https://vitejs.dev">Vite</a> and <a href="https://swc.rs">swc</a> and powerful, developer-friendly frameworks like <a href="https://docusaurus.io">Docusaurus</a>, <a href="https://nextjs.org">Next.js</a>, <a href="https://gatsbyjs.com">Gatsby</a>, <a href="https://nuxtjs.org">Nuxt</a>, <a href="https://astro.build">Astro</a>, and <a href="https://remix.run">Remix</a>.</p>
+<p>One thing these frameworks have in common is that they require you to do your own content management. If you want to build a blog or a documentation site, you need to supply your own logic to fetch files, choose the right data from those files, convert files in formats like <a href="https://www.markdownguide.org">Markdown</a> to HTML, and so on.</p>
+<p>Some of these frameworks do have good content management libraries, such as <a href="https://content.nuxtjs.org"><code>nuxt-content</code></a> for <a href="https://nuxtjs.org">Nuxt</a>, but I look out into this space and see a lot of redundant effort. What if we could just have <em>one</em> really good library that developers could use directly inside of these frameworks <em>or</em> as the basis for framwork-specific libraries?</p>
+<p>Some more specific things I want to enable you to do far more easily than you can now:</p>
+<ul>
+<li>Generate search indices for services like <a href="https://algolia.com">Algolia</a> and libraries like <a href="https://lunrjs.com">Lunr.js</a>.</li>
+<li>Create and query taxonomies like tags and categories.</li>
+<li>Generate per-page tables of content as structured data that you can style on your own.</li>
+<li>Divide your content up into structures like sections (à la <a href="https://gohugo.io/content-management/sections">Hugo</a>).</li>
+<li>Pipe your Markdown files through highly configurable parsing pipelines (but with well-chosen defaults).</li>
+<li>Use multiple markup formats in the same project (so not just <a href="https://www.markdownguide.org">Markdown</a>).</li>
+</ul>
 
 <a href="#example" id="example" style="color: inherit; text-decoration: none;">
   <h2>Example</h2>
