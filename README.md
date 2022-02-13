@@ -2,7 +2,11 @@
 
 [![build-test](https://github.com/lucperkins/inhalt/actions/workflows/all.yml/badge.svg)](https://github.com/lucperkins/inhalt/actions/workflows/all.yml)
 
-A library for content management in your filesystem. Inhalt is [meant](#goals) to power content management across JavaScript frameworks.
+Inhalt is a TypeScript/JavaScript library for local content management. It's mean to be used with static generators and other tools that involve turning assets in your local directories—Markdown, JSON, YAML, and others—into HTML, tables of content, search indices, and all the other things that make blogs, documentation hubs, and other complex sites work.
+
+## Status
+
+Inhalt is in its _very_ early phases—as in, still basically a weekend project. Don't use it just yet but if you have requests for what you'd want to see in a library like this, please do feel free to file an issue!
 
 ## Goals
 
