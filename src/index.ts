@@ -1,11 +1,11 @@
-import fg from "fast-glob";
-import { readFile } from "fs/promises";
-import { join, parse, ParsedPath } from "path";
-import rehypeSanitize from "rehype-sanitize";
-import rehypeStringify from "rehype-stringify";
-import remarkParse from "remark-parse";
-import remarkRehype from "remark-rehype";
-import { unified } from "unified";
+import fg from 'fast-glob';
+import { readFile } from 'fs/promises';
+import { join, parse, ParsedPath } from 'path';
+import rehypeSanitize from 'rehype-sanitize';
+import rehypeStringify from 'rehype-stringify';
+import remarkParse from 'remark-parse';
+import remarkRehype from 'remark-rehype';
+import { unified } from 'unified';
 
 const convert = async (input: string): Promise<string> => {
   const parsed = await unified()
@@ -68,9 +68,7 @@ class Files {
   }
 }
 
-type Pattern = string | string[];
-
-const glob = async (pattern: Pattern): Promise<Files> => {
+const glob = async (pattern: string | string[]): Promise<Files> => {
   const files: File[] = [];
   const stream = fg.stream(pattern, { dot: true });
   for await (const entry of stream) {
