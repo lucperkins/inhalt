@@ -1,6 +1,6 @@
-import { assert, test } from 'vitest';
+import { assert, test } from "vitest";
 
-import { File, glob } from '../src';
+import { File, glob } from "../src";
 
 test("globs", async () => {
   const expected: File[] = [

@@ -1,11 +1,11 @@
-import fg from 'fast-glob';
-import { readFile } from 'fs/promises';
-import { join, parse, ParsedPath } from 'path';
-import rehypeSanitize from 'rehype-sanitize';
-import rehypeStringify from 'rehype-stringify';
-import remarkParse from 'remark-parse';
-import remarkRehype from 'remark-rehype';
-import { unified } from 'unified';
+import fg from "fast-glob";
+import { readFile } from "fs/promises";
+import { join, parse, ParsedPath } from "path";
+import rehypeSanitize from "rehype-sanitize";
+import rehypeStringify from "rehype-stringify";
+import remarkParse from "remark-parse";
+import remarkRehype from "remark-rehype";
+import { unified } from "unified";
 
 const convert = async (input: string): Promise<string> => {
   const parsed = await unified()
