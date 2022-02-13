@@ -1,11 +1,11 @@
-import fg from "fast-glob";
-import { readFile } from "fs/promises";
-import { join, parse, ParsedPath } from "path";
-import rehypeSanitize from "rehype-sanitize";
-import rehypeStringify from "rehype-stringify";
-import remarkParse from "remark-parse";
-import remarkRehype from "remark-rehype";
-import { unified } from "unified";
+import fg from 'fast-glob';
+import { readFile } from 'fs/promises';
+import { join, parse, ParsedPath } from 'path';
+import rehypeSanitize from 'rehype-sanitize';
+import rehypeStringify from 'rehype-stringify';
+import remarkParse from 'remark-parse';
+import remarkRehype from 'remark-rehype';
+import { unified } from 'unified';
 
 const convert = async (input: string): Promise<string> => {
   const parsed = await unified()
@@ -26,7 +26,7 @@ type File = {
   raw: string;
 };
 
-interface Markdown extends File {
+interface Document extends File {
   html: string;
 }
 
@@ -54,7 +54,7 @@ class Files {
     this._files = files;
   }
 
-  markdown(): Promise<Markdown[]> {
+  async documents(): Promise<Document[]> {
     return Promise.all(
       this._files.map(async (file) => {
         const html = await convert(file.raw);
@@ -64,6 +64,14 @@ class Files {
         };
       })
     );
+  }
+
+  get slugs(): string[] {
+    return this._files.map((f: File) => f.slug);
+  }
+
+  get paths(): string[] {
+    return this._files.map((f: File) => f.path);
   }
 
   get files(): File[] {
@@ -81,13 +89,4 @@ const glob = async (pattern: string | string[]): Promise<Files> => {
   return new Files(files);
 };
 
-const files = async (directory: string): Promise<Files> => {
-  const pattern = `${directory}/**/*`;
-  return glob(pattern);
-};
-
-const markdown = async (pattern: string): Promise<Markdown[]> => {
-  return (await glob(pattern)).markdown();
-};
-
-export { glob, files, markdown, File, Files, Markdown };
+export { glob, Document, File, Files };
