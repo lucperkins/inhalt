@@ -44,6 +44,14 @@ const makeFile = async (filepath: string): Promise<File> => {
   };
 };
 
+const makeDoc = async (f: File): Promise<Document> => {
+  const html = await convert(f.raw);
+  return {
+    html,
+    ...f,
+  };
+};
+
 /**
  * A helper class for working with collections of {@linkcode File}s.
  */
@@ -57,11 +65,7 @@ class Files {
   documents(): Promise<Document[]> {
     return Promise.all(
       this._files.map(async (file) => {
-        const html = await convert(file.raw);
-        return {
-          html,
-          ...file,
-        };
+        return makeDoc(file);
       })
     );
   }
@@ -93,4 +97,4 @@ const documents = async (pattern: string | string[]): Promise<Document[]> => {
   return await (await glob(pattern)).documents();
 };
 
-export { glob, documents, Document, File, Files };
+export { documents, glob, Document, File, Files };
