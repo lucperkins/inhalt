@@ -12,7 +12,7 @@ Inhalt is in its _very_ early phases—as in, still basically a weekend project.
 
 Static site generation has recently gotten _very_ interesting in the JavaScript space with the rise of blazing-fast build tools like [Vite] and [swc] and powerful, developer-friendly frameworks like [Next.js][next], [Gatsby], [Nuxt], [Astro], and [Remix].
 
-One thing these frameworks have in common is that they require you to do your own content management. If you want to build a blog or a documentation site, you need to supply your own logic to fetch files, choose the right data from those files, convert files in formats like [Markdown] to HTML, and so on. Some of these frameworks do have good content management libraries, such as [`nuxt-content`][nuxt-content] for [Nuxt].
+One thing these frameworks have in common is that they require you to do your own content management. If you want to build a blog or a documentation site, you need to supply your own logic to fetch files, choose the right data from those files, convert files in formats like [Markdown] to HTML, and so on. Some of these frameworks do have good content management libraries, such as [`nuxt-content`][nuxt-content] for [Nuxt], but I don't really see anyone sharing their work or trying to build something foundational to relieve others of work.
 
 But I look out in this space and see a lot of redundant effort. What if we could just have _one_ really good library that developers could use directly inside of these frameworks _or_ as the basis for framwork-specific libraries.
 
@@ -90,7 +90,7 @@ export default Doc(props) {
 
 ## Documentation
 
-[Typedoc][docs]
+Docs are very much a work in progress but you can check out the [Typedoc][docs].
 
 [astro]: https://astro.build
 [docs]: https://lucperkins.github.io/inhalt
