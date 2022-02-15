@@ -19,35 +19,37 @@ const convert = async (input: string): Promise<string> => {
 };
 
 type File = {
+  name: string;
   dir: string;
   path: string;
   extension: string;
-  slug: string;
   raw: string;
 };
 
 interface Document extends File {
+  slug: string;
   html: string;
 }
 
 const makeFile = async (filepath: string): Promise<File> => {
   const path: ParsedPath = parse(filepath);
   const raw: Buffer = await readFile(filepath);
-  const slug = join(path.dir, path.name);
 
   return {
+    name: path.name,
     dir: path.dir,
     path: filepath,
     extension: path.ext,
-    slug,
     raw: raw.toString(),
   };
 };
 
 const makeDoc = async (f: File): Promise<Document> => {
   const html = await convert(f.raw);
+  const slug = join(f.dir, f.name);
   return {
     html,
+    slug,
     ...f,
   };
 };
@@ -78,8 +80,23 @@ class Files {
     return this._files.map((f: File) => f.path);
   }
 
-  get files(): File[] {
+  get all(): File[] {
     return this._files;
+  }
+}
+
+/**
+ * A helper class for working with collections of {@linkcode Document}s.
+ */
+class Documents {
+  private readonly _documents: Document[];
+
+  constructor(documents: Document[]) {
+    this._documents = documents;
+  }
+
+  get all(): Document[] {
+    return this._documents;
   }
 }
 
