@@ -72,15 +72,11 @@ class Files {
     );
   }
 
-  get slugs(): string[] {
-    return this._files.map((f: File) => f.slug);
-  }
-
-  get paths(): string[] {
+  paths(): string[] {
     return this._files.map((f: File) => f.path);
   }
 
-  get all(): File[] {
+  all(): File[] {
     return this._files;
   }
 }
@@ -95,23 +91,44 @@ class Documents {
     this._documents = documents;
   }
 
-  get all(): Document[] {
+  slugs(): string[] {
+    return this._documents.map((doc) => doc.slug);
+  }
+
+  all(): Document[] {
     return this._documents;
   }
 }
 
-const glob = async (pattern: string | string[]): Promise<Files> => {
-  const files: File[] = [];
-  const stream = fg.stream(pattern, { dot: true });
-  for await (const entry of stream) {
-    const f = await makeFile(entry as string);
-    files.push(f);
-  }
+const files = async (pattern: string | string[]): Promise<Files> => {
+  const files: File[] = await walkAndReturn(pattern, async (filepath: string): Promise<File> => {
+    return await makeFile(filepath);
+  });
   return new Files(files);
 };
 
-const documents = async (pattern: string | string[]): Promise<Document[]> => {
-  return await (await glob(pattern)).documents();
+const documents = async (pattern: string | string[]): Promise<Documents> => {
+  const documents: Document[] = await walkAndReturn(
+    pattern,
+    async (filepath: string | Buffer): Promise<Document> => {
+      const f = await makeFile(filepath as string);
+      return makeDoc(f);
+    }
+  );
+  return new Documents(documents);
 };
 
-export { documents, glob, Document, File, Files };
+const walkAndReturn = async <T>(
+  pattern: string | string[],
+  fn: (filepath: string) => Promise<T>
+): Promise<T[]> => {
+  const items: T[] = [];
+  const stream: NodeJS.ReadableStream = fg.stream(pattern, { dot: true });
+  for await (const entry of stream) {
+    const t: T = await fn(entry as string);
+    items.push(t);
+  }
+  return items;
+};
+
+export { documents, files, Document, Documents, File, Files };

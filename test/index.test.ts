@@ -1,9 +1,9 @@
 import { assert, test } from "vitest";
 
-import { Document, documents, File, Files, glob } from "../src";
+import { Document, Documents, documents, File, Files, files } from "../src";
 
 test("globs", async () => {
-  const expected: File[] = [
+  const expectedFiles: File[] = [
     {
       name: "index",
       dir: "test/_files",
@@ -20,12 +20,12 @@ test("globs", async () => {
     },
   ];
 
-  const mdFiles: Files = await glob("test/_files/**/*.{md,mdx}");
-  assert.sameDeepMembers(mdFiles.all, expected);
+  const mdFiles: Files = await files("test/_files/**/*.{md,mdx}");
+  assert.sameDeepMembers(mdFiles.all(), expectedFiles);
 });
 
 test("markdown", async () => {
-  const expected: Document[] = [
+  const expectedDocs: Document[] = [
     {
       name: "index",
       dir: "test/_docs",
@@ -37,6 +37,9 @@ test("markdown", async () => {
     },
   ];
 
-  const docs: Document[] = await documents("test/_docs/**/*.{md,mdx}");
-  assert.sameDeepMembers(docs, expected);
+  const docs: Documents = await documents("test/_docs/**/*.{md,mdx}");
+  assert.sameDeepMembers(docs.all(), expectedDocs);
+
+  const expectedSlugs: string[] = ["test/_docs/index"];
+  assert.sameDeepMembers(docs.slugs(), expectedSlugs);
 });
