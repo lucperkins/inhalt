@@ -110,7 +110,7 @@ const files = async (pattern: string | string[]): Promise<Files> => {
 const documents = async (pattern: string | string[]): Promise<Documents> => {
   const documents: Document[] = await walkAndReturn(
     pattern,
-    async (filepath: string | Buffer): Promise<Document> => {
+    async (filepath: string): Promise<Document> => {
       const f = await makeFile(filepath as string);
       return makeDoc(f);
     }
