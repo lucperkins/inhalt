@@ -2,6 +2,8 @@
 
 [![build-test](https://github.com/lucperkins/inhalt/actions/workflows/all.yml/badge.svg)](https://github.com/lucperkins/inhalt/actions/workflows/all.yml)
 
+[Coverage](https://lucperkins.github.io/inhalt/coverage)
+
 Inhalt is a TypeScript/JavaScript library for local content management. It's mean to be used with static generators and other tools that involve turning assets in your local directories—Markdown, JSON, YAML, and others—into HTML, tables of content, search indices, and all the other things that make blogs, documentation hubs, and other complex sites work.
 
 ## Status
