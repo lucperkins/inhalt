@@ -29,7 +29,7 @@
     "test:prettier": "prettier \"{src,test}/**/*.ts\" --list-different",
     "test:unit": "vitest run",
     "watch:test": "vitest watch",
-    "coverage": "vitest run --coverage --outputFile ./build/coverage",
+    "coverage": "vitest run --coverage",
     "prepare": "husky install"
   },
   "engines": {
