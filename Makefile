@@ -10,3 +10,7 @@ fix:
 .PHONY: test
 test: fix
 	npm run test
+
+.PHONY: watch-test
+watch-test:
+	npm run watch:test
