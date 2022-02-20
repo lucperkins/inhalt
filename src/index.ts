@@ -1,5 +1,6 @@
 import fg from "fast-glob";
 import { readFile } from "fs/promises";
+import matter, { GrayMatterFile, Input } from "gray-matter";
 import { join, parse, ParsedPath } from "path";
 import rehypeSanitize from "rehype-sanitize";
 import rehypeStringify from "rehype-stringify";
@@ -7,15 +8,30 @@ import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import { unified } from "unified";
 
-const convert = async (input: string): Promise<string> => {
+type Data = { [key: string]: any };
+
+type FrontMatter = {
+  title: string;
+};
+
+const makeDoc = async (file: File): Promise<Document> => {
+  const slug = join(file.dir, file.name);
+  const doc: GrayMatterFile<Input> = await matter(file.raw);
+  const title: string = doc.data["title"] !== undefined ? (doc.data["title"] as string) : file.name;
+
   const parsed = await unified()
     .use(remarkParse)
     .use(remarkRehype)
     .use(rehypeSanitize)
     .use(rehypeStringify)
-    .process(input);
+    .process(doc.content);
 
-  return String(parsed);
+  return {
+    title,
+    slug,
+    html: parsed.toString(),
+    ...file,
+  };
 };
 
 type File = {
@@ -27,6 +43,7 @@ type File = {
 };
 
 interface Document extends File {
+  title: string;
   slug: string;
   html: string;
 }
@@ -41,16 +58,6 @@ const makeFile = async (filepath: string): Promise<File> => {
     path: filepath,
     extension: path.ext,
     raw: raw.toString(),
-  };
-};
-
-const makeDoc = async (f: File): Promise<Document> => {
-  const html = await convert(f.raw);
-  const slug = join(f.dir, f.name);
-  return {
-    html,
-    slug,
-    ...f,
   };
 };
 

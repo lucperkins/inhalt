@@ -1,3 +1,5 @@
-# The documentation
+---
+title: The documentation
+---
 
 Welcome to the documentation!

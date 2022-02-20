@@ -17,7 +17,7 @@ test("globs", async () => {
       dir: "test/_files",
       path: "test/_files/index.md",
       extension: ".md",
-      raw: "# The documentation\n\nWelcome to the documentation!\n",
+      raw: "---\ntitle: The documentation\n---\n\nWelcome to the documentation!\n",
     },
     {
       name: "getting-started",
@@ -39,22 +39,24 @@ test("globs", async () => {
 
   const expectedDocs: Document[] = [
     {
+      title: "The documentation",
       name: "index",
       dir: "test/_files",
       path: "test/_files/index.md",
       extension: ".md",
-      raw: "# The documentation\n\nWelcome to the documentation!\n",
+      raw: "---\ntitle: The documentation\n---\n\nWelcome to the documentation!\n",
       slug: "test/_files/index",
-      html: "<h1>The documentation</h1>\n<p>Welcome to the documentation!</p>",
+      html: "<p>Welcome to the documentation!</p>",
     },
     {
+      title: "Getting started",
       name: "getting-started",
       dir: "test/_files/nested",
       path: "test/_files/nested/getting-started.mdx",
       extension: ".mdx",
       raw: "---\ntitle: Getting started\n---\n\nThis is how you get started.\n",
       slug: "test/_files/nested/getting-started",
-      html: "<hr>\n<h2>title: Getting started</h2>\n<p>This is how you get started.</p>",
+      html: "<p>This is how you get started.</p>",
     },
   ];
   assert.sameDeepMembers(await mdFiles.documents(), expectedDocs);
@@ -63,6 +65,7 @@ test("globs", async () => {
 test("markdown", async () => {
   const expectedDocs: Document[] = [
     {
+      title: "index",
       name: "index",
       dir: "test/_docs",
       path: "test/_docs/index.md",
