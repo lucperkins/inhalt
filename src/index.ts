@@ -10,14 +10,19 @@ import { unified } from "unified";
 
 type Data = { [key: string]: any };
 
-type FrontMatter = {
-  title: string;
+const makeFrontMatter = (front: Data): Data => {
+  if (front["title"] !== undefined) {
+    delete front["title"];
+  }
+
+  return front;
 };
 
 const makeDoc = async (file: File): Promise<Document> => {
   const slug = join(file.dir, file.name);
   const doc: GrayMatterFile<Input> = await matter(file.raw);
   const title: string = doc.data["title"] !== undefined ? (doc.data["title"] as string) : file.name;
+  const front: Data = makeFrontMatter(doc.data);
 
   const parsed = await unified()
     .use(remarkParse)
@@ -26,12 +31,18 @@ const makeDoc = async (file: File): Promise<Document> => {
     .use(rehypeStringify)
     .process(doc.content);
 
-  return {
+  const document: Document = {
     title,
     slug,
     html: parsed.toString(),
     ...file,
   };
+
+  if (Object.keys(front).length > 0) {
+    document.front = front;
+  }
+
+  return document;
 };
 
 type File = {
@@ -44,6 +55,7 @@ type File = {
 
 interface Document extends File {
   title: string;
+  front?: Data;
   slug: string;
   html: string;
 }

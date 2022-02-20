@@ -65,14 +65,20 @@ test("globs", async () => {
 test("markdown", async () => {
   const expectedDocs: Document[] = [
     {
-      title: "index",
+      title: "Welcome to the docs",
+      front: {
+        foo: "bar",
+        nested: {
+          down: "okay",
+        },
+      },
       name: "index",
       dir: "test/_docs",
       path: "test/_docs/index.md",
       extension: ".md",
       slug: "test/_docs/index",
-      raw: "# Welcome to the docs!\n",
-      html: "<h1>Welcome to the docs!</h1>",
+      raw: "---\ntitle: Welcome to the docs\nfoo: bar\nnested:\n  down: okay\n---\n\nYou're gonna like these docs.\n",
+      html: "<p>You're gonna like these docs.</p>",
     },
   ];
 
