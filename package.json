@@ -1,6 +1,6 @@
 {
   "name": "inhalt",
-  "version": "0.1.0-SNAPSHOT",
+  "version": "0.0.1-SNAPSHOT",
   "description": "Content management system",
   "type": "module",
   "main": "build/main/index.js",
