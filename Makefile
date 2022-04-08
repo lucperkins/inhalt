@@ -1,3 +1,7 @@
+.PHONY: audit
+audit:
+	npm audit fix
+
 .PHONY: coverage
 coverage:
 	npm run coverage
